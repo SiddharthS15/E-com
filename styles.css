@@ -63,4 +63,28 @@ header {
 #cart-total {
     font-weight: bold;
     text-align: right;
+}
+.navbar {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    background: #222;
+    padding: 0.75rem 0;
+    margin: 0;
+    list-style: none;
+}
+.navbar li {
+    margin: 0;
+}
+.navbar a {
+    color: #fff;
+    text-decoration: none;
+    font-weight: bold;
+    padding: 0.5rem 1rem;
+    border-radius: 4px;
+    transition: background 0.2s;
+}
+.navbar a:hover {
+    background: #007bff;
+    color: #fff;
 } 
