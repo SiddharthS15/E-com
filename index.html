@@ -9,40 +9,81 @@
 </head>
 <body>
     <header>
-        <h1>Simple E-Commerce</h1>
+        <h1>Fashion Store</h1>
+        <p>Your Style, Your Statement</p>
     </header>
     <div class="running-text">
         <marquee behavior="scroll" direction="left" scrollamount="5">
-            🔥 Special Offers Available! | Free Shipping on Orders Above ₹500 | 24/7 Customer Support | New Products Added Daily! 🔥
+            🔥 New Collection Arrived! | Free Shipping on Orders Above ₹999 | Trendy Fashion for All | 30-Day Returns! 🔥
         </marquee>
     </div>
     <nav>
         <ul class="navbar">
             <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
+            <li><a href="products.html">All Products</a></li>
             <li><a href="cart.html">Cart</a></li>
             <li><a href="contact.html">Contact</a></li>
         </ul>
     </nav>
+    
+    <!-- Category Selection -->
+    <section class="category-selector">
+        <h2>Shop by Category</h2>
+        <div class="category-buttons">
+            <button class="category-btn active" onclick="showCategory('men')">Men's Fashion</button>
+            <button class="category-btn" onclick="showCategory('women')">Women's Fashion</button>
+            <button class="category-btn" onclick="showCategory('all')">All Items</button>
+        </div>
+    </section>
+
     <main>
-        <section class="products">
-            <div class="product">
-                <img src="images/product1.jpg" alt="Product 1">
-                <h2>Product 1</h2>
-                <p>₹10.00</p>
-                <button>Add to Cart</button>
+        <!-- Men's Section -->
+        <section class="products men-section" id="men-products">
+            <h3>Men's Collection</h3>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/men-shirt1.jpg" alt="Men's Casual Shirt">
+                    <h4>Casual Cotton Shirt</h4>
+                    <p class="price">₹899</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="images/men-jeans1.jpg" alt="Men's Jeans">
+                    <h4>Slim Fit Jeans</h4>
+                    <p class="price">₹1,299</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="images/men-tshirt1.jpg" alt="Men's T-Shirt">
+                    <h4>Premium T-Shirt</h4>
+                    <p class="price">₹599</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
             </div>
-            <div class="product">
-                <img src="images/product2.jpg" alt="Product 2">
-                <h2>Product 2</h2>
-                <p>₹15.00</p>
-                <button>Add to Cart</button>
-            </div>
-            <div class="product">
-                <img src="images/product3.jpg" alt="Product 3">
-                <h2>Product 3</h2>
-                <p>₹20.00</p>
-                <button>Add to Cart</button>
+        </section>
+
+        <!-- Women's Section -->
+        <section class="products women-section" id="women-products" style="display: none;">
+            <h3>Women's Collection</h3>
+            <div class="product-grid">
+                <div class="product">
+                    <img src="images/women-dress1.jpg" alt="Women's Dress">
+                    <h4>Elegant Summer Dress</h4>
+                    <p class="price">₹1,199</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="images/women-top1.jpg" alt="Women's Top">
+                    <h4>Stylish Blouse</h4>
+                    <p class="price">₹799</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
+                <div class="product">
+                    <img src="images/women-jeans1.jpg" alt="Women's Jeans">
+                    <h4>High-Waist Jeans</h4>
+                    <p class="price">₹1,099</p>
+                    <button class="add-to-cart">Add to Cart</button>
+                </div>
             </div>
         </section>
         <section class="cart">
@@ -53,9 +94,36 @@
             <p id="cart-total">Total: ₹0.00</p>
         </section>
     </main>
+
+    <!-- JavaScript for category switching -->
+    <script>
+        function showCategory(category) {
+            const menSection = document.getElementById('men-products');
+            const womenSection = document.getElementById('women-products');
+            const buttons = document.querySelectorAll('.category-btn');
+            
+            // Remove active class from all buttons
+            buttons.forEach(btn => btn.classList.remove('active'));
+            
+            // Add active class to clicked button
+            event.target.classList.add('active');
+            
+            // Show/hide sections based on category
+            if (category === 'men') {
+                menSection.style.display = 'block';
+                womenSection.style.display = 'none';
+            } else if (category === 'women') {
+                menSection.style.display = 'none';
+                womenSection.style.display = 'block';
+            } else if (category === 'all') {
+                menSection.style.display = 'block';
+                womenSection.style.display = 'block';
+            }
+        }
+    </script>
     <footer>
         <div class="footer-content">
-            <span>&copy; 2024 Simple E-Commerce</span>
+            <span>&copy; 2024 Fashion Store</span>
             <div class="social-icons">
                 <a href="#" aria-label="Instagram">&#x1F4F7;</a>
                 <a href="#" aria-label="Twitter">&#x1F426;</a>
