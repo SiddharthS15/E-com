@@ -52,20 +52,20 @@
             
             <!-- Navigation Links -->
             <ul class="navbar-center">
-                <li><a href="index.html" class="nav-link active">
+                <li><a href="index.html" class="nav-link active" onclick="handleNavClick(this, 'home')">
                     <span class="nav-text">Home</span>
                 </a></li>
-                <li><a href="#men-products" class="nav-link" onclick="showCategory('men')">
+                <li><a href="#men-products" class="nav-link" onclick="handleNavClick(this, 'men'); showCategory('men')">
                     <span class="nav-text">Men's</span>
                 </a></li>
-                <li><a href="#women-products" class="nav-link" onclick="showCategory('women')">
+                <li><a href="#women-products" class="nav-link" onclick="handleNavClick(this, 'women'); showCategory('women')">
                     <span class="nav-text">Women's</span>
                 </a></li>
-                <li><a href="#cart" class="nav-link" onclick="scrollToCart()">
+                <li><a href="#cart" class="nav-link" onclick="handleNavClick(this, 'cart'); scrollToCart()">
                     <span class="nav-text">Cart</span>
                     <span class="cart-count" id="cartCount">0</span>
                 </a></li>
-                <li><a href="contact.html" class="nav-link">
+                <li><a href="contact.html" class="nav-link" onclick="handleNavClick(this, 'contact')">
                     <span class="nav-text">Contact</span>
                 </a></li>
             </ul>
@@ -255,6 +255,140 @@
                     dropdown.classList.remove('active');
                 }
             });
+        }
+
+        // Handle navigation click events with visual feedback
+        function handleNavClick(clickedElement, section) {
+            // Remove active class from all nav links
+            const allNavLinks = document.querySelectorAll('.nav-link');
+            allNavLinks.forEach(link => {
+                link.classList.remove('active');
+                // Reset any previous animations
+                link.style.transform = '';
+                link.style.filter = '';
+            });
+            
+            // Add active class to clicked element
+            clickedElement.classList.add('active');
+            
+            // Create visual feedback with fade effect
+            createNavClickEffect(clickedElement, section);
+            
+            // Add pulse animation to show which item was clicked
+            clickedElement.style.transform = 'scale(1.1)';
+            clickedElement.style.transition = 'all 0.3s ease';
+            
+            setTimeout(() => {
+                clickedElement.style.transform = 'scale(1)';
+            }, 200);
+            
+            // Show notification of which section was clicked
+            showNavNotification(`Navigating to ${section.charAt(0).toUpperCase() + section.slice(1)} section`);
+        }
+
+        // Create visual click effect
+        function createNavClickEffect(element, section) {
+            // Create ripple effect
+            const ripple = document.createElement('div');
+            ripple.style.cssText = `
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.6);
+                transform: scale(0);
+                animation: ripple 0.6s linear;
+                pointer-events: none;
+                z-index: 1000;
+            `;
+            
+            const rect = element.getBoundingClientRect();
+            const size = Math.max(rect.width, rect.height);
+            ripple.style.width = ripple.style.height = size + 'px';
+            ripple.style.left = (rect.left + rect.width / 2 - size / 2) + 'px';
+            ripple.style.top = (rect.top + rect.height / 2 - size / 2) + 'px';
+            
+            document.body.appendChild(ripple);
+            
+            // Remove ripple after animation
+            setTimeout(() => {
+                if (document.body.contains(ripple)) {
+                    document.body.removeChild(ripple);
+                }
+            }, 600);
+            
+            // Add fade effect to current content
+            addContentFadeEffect(section);
+        }
+
+        // Add fade effect to content
+        function addContentFadeEffect(section) {
+            const main = document.querySelector('main');
+            const categorySelector = document.querySelector('.category-selector');
+            
+            // Fade out effect
+            main.style.opacity = '0.7';
+            main.style.transform = 'translateY(10px)';
+            main.style.transition = 'all 0.3s ease';
+            
+            if (categorySelector) {
+                categorySelector.style.opacity = '0.7';
+                categorySelector.style.transform = 'translateY(10px)';
+                categorySelector.style.transition = 'all 0.3s ease';
+            }
+            
+            // Fade back in
+            setTimeout(() => {
+                main.style.opacity = '1';
+                main.style.transform = 'translateY(0)';
+                
+                if (categorySelector) {
+                    categorySelector.style.opacity = '1';
+                    categorySelector.style.transform = 'translateY(0)';
+                }
+            }, 300);
+        }
+
+        // Show navigation notification
+        function showNavNotification(message) {
+            const notification = document.createElement('div');
+            notification.className = 'nav-notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 80px;
+                left: 50%;
+                transform: translateX(-50%);
+                background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+                color: white;
+                padding: 8px 20px;
+                border-radius: 20px;
+                box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+                z-index: 1000;
+                font-weight: 600;
+                font-size: 0.9rem;
+                opacity: 0;
+                transform: translateX(-50%) translateY(-20px);
+                transition: all 0.3s ease;
+                pointer-events: none;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            // Animate in
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(-50%) translateY(0)';
+            }, 10);
+            
+            // Animate out
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(-50%) translateY(-20px)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 2000);
         }
 
         // Toggle profile dropdown menu
@@ -508,8 +642,15 @@
             // Remove active class from all buttons
             buttons.forEach(btn => btn.classList.remove('active'));
             
-            // Add active class to clicked button
-            event.target.classList.add('active');
+            // Find and activate the appropriate button
+            buttons.forEach(btn => {
+                const buttonText = btn.textContent.toLowerCase();
+                if ((category === 'men' && buttonText.includes("men's")) ||
+                    (category === 'women' && buttonText.includes("women's")) ||
+                    (category === 'all' && buttonText.includes("all"))) {
+                    btn.classList.add('active');
+                }
+            });
             
             // Show/hide sections with smooth animation
             if (category === 'men') {
