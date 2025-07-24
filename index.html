@@ -42,18 +42,100 @@
             🔥 New Collection Arrived! | Free Shipping on Orders Above ₹999 | Trendy Fashion for All | 30-Day Returns! 🔥
         </marquee>
     </div>
-    <nav>
+    <nav class="main-navbar">
         <div class="nav-container">
-            <ul class="navbar-left">
-                <li><a href="index.html">Home</a></li>
-                <li><a href="products.html">All Products</a></li>
-                <li><a href="cart.html">Cart</a></li>
-                <li><a href="contact.html">Contact</a></li>
+            <!-- Logo/Brand -->
+            <div class="navbar-brand">
+                <span class="brand-icon">👗</span>
+                <span class="brand-text">Fashion Store</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <ul class="navbar-center">
+                <li><a href="index.html" class="nav-link active">
+                    <span class="nav-icon">🏠</span>
+                    <span class="nav-text">Home</span>
+                </a></li>
+                <li><a href="products.html" class="nav-link">
+                    <span class="nav-icon">👕</span>
+                    <span class="nav-text">All Products</span>
+                </a></li>
+                <li><a href="#men-products" class="nav-link" onclick="showCategory('men')">
+                    <span class="nav-icon">👔</span>
+                    <span class="nav-text">Men's</span>
+                </a></li>
+                <li><a href="#women-products" class="nav-link" onclick="showCategory('women')">
+                    <span class="nav-icon">👚</span>
+                    <span class="nav-text">Women's</span>
+                </a></li>
+                <li><a href="cart.html" class="nav-link">
+                    <span class="nav-icon">🛒</span>
+                    <span class="nav-text">Cart</span>
+                    <span class="cart-count" id="cartCount">0</span>
+                </a></li>
+                <li><a href="contact.html" class="nav-link">
+                    <span class="nav-icon">📞</span>
+                    <span class="nav-text">Contact</span>
+                </a></li>
             </ul>
-            <ul class="navbar-right" id="authLinks">
-                <li><a href="register.html" id="registerLink" class="auth-btn register-btn">Register</a></li>
-                <li><a href="login.html" id="loginLink" class="auth-btn login-btn">Login</a></li>
-            </ul>
+            
+            <!-- Profile Circle -->
+            <div class="profile-circle" id="profileCircle" onclick="toggleProfileMenu()">
+                <div class="profile-avatar" id="profileAvatar">
+                    <span id="profileInitials">👤</span>
+                </div>
+                <div class="profile-dropdown" id="profileDropdown">
+                    <div class="dropdown-content">
+                        <!-- Login/Register Options (shown when not logged in) -->
+                        <div class="auth-options" id="authOptions">
+                            <div class="dropdown-header">
+                                <span class="welcome-text">Welcome!</span>
+                                <p class="login-prompt">Sign in to access your account</p>
+                            </div>
+                            <a href="login.html" class="dropdown-item login-item">
+                                <span class="dropdown-icon">🔑</span>
+                                <span>Login</span>
+                            </a>
+                            <a href="register.html" class="dropdown-item register-item">
+                                <span class="dropdown-icon">📝</span>
+                                <span>Create Account</span>
+                            </a>
+                        </div>
+                        
+                        <!-- User Options (shown when logged in) -->
+                        <div class="user-options" id="userOptions" style="display: none;">
+                            <div class="dropdown-header">
+                                <div class="user-info-mini">
+                                    <div class="user-avatar-mini" id="userAvatarMini">
+                                        <span id="userInitialsMini">U</span>
+                                    </div>
+                                    <div class="user-details-mini">
+                                        <span class="user-name-mini" id="userNameMini">User</span>
+                                        <span class="user-email-mini" id="userEmailMini">user@example.com</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <a href="#" class="dropdown-item" onclick="showProfile()">
+                                <span class="dropdown-icon">👤</span>
+                                <span>My Profile</span>
+                            </a>
+                            <a href="#" class="dropdown-item" onclick="showOrders()">
+                                <span class="dropdown-icon">📦</span>
+                                <span>My Orders</span>
+                            </a>
+                            <a href="#" class="dropdown-item" onclick="showWishlist()">
+                                <span class="dropdown-icon">❤️</span>
+                                <span>Wishlist</span>
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="#" class="dropdown-item logout-item" onclick="logout()">
+                                <span class="dropdown-icon">🚪</span>
+                                <span>Logout</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </nav>
     
@@ -168,7 +250,40 @@
             addCartListeners();
             addScrollEffects();
             addProductHoverEffects();
+            setupProfileDropdown();
         });
+
+        // Setup profile dropdown functionality
+        function setupProfileDropdown() {
+            // Close dropdown when clicking outside
+            document.addEventListener('click', function(e) {
+                const profileCircle = document.getElementById('profileCircle');
+                const dropdown = document.getElementById('profileDropdown');
+                
+                if (!profileCircle.contains(e.target)) {
+                    dropdown.classList.remove('active');
+                }
+            });
+        }
+
+        // Toggle profile dropdown menu
+        function toggleProfileMenu() {
+            const dropdown = document.getElementById('profileDropdown');
+            dropdown.classList.toggle('active');
+        }
+
+        // Update cart count in navbar
+        function updateCartCount() {
+            const cartCount = document.getElementById('cartCount');
+            if (cartCount) {
+                cartCount.textContent = cart.length;
+                if (cart.length > 0) {
+                    cartCount.style.display = 'flex';
+                } else {
+                    cartCount.style.display = 'none';
+                }
+            }
+        }
 
         // Check if user is logged in
         function checkUserLogin() {
@@ -183,49 +298,54 @@
             }
         }
 
-        // Show user profile bar
+        // Show user profile in dropdown
         function showUserProfile() {
-            const profileBar = document.getElementById('userProfileBar');
-            const userName = document.getElementById('userName');
-            const userEmail = document.getElementById('userEmail');
-            const userInitials = document.getElementById('userInitials');
-            const authLinks = document.getElementById('authLinks');
+            const authOptions = document.getElementById('authOptions');
+            const userOptions = document.getElementById('userOptions');
+            const profileInitials = document.getElementById('profileInitials');
+            const userNameMini = document.getElementById('userNameMini');
+            const userEmailMini = document.getElementById('userEmailMini');
+            const userInitialsMini = document.getElementById('userInitialsMini');
             
             if (currentUser) {
-                // Update user info
-                userName.textContent = `Welcome, ${currentUser.firstName}!`;
-                userEmail.textContent = currentUser.email;
+                // Hide auth options, show user options
+                authOptions.style.display = 'none';
+                userOptions.style.display = 'block';
                 
-                // Generate initials
+                // Update profile initials
                 const initials = (currentUser.firstName.charAt(0) + currentUser.lastName.charAt(0)).toUpperCase();
-                userInitials.textContent = initials;
+                profileInitials.textContent = initials;
+                userInitialsMini.textContent = initials;
                 
-                // Show profile bar
-                profileBar.style.display = 'flex';
+                // Update user info in dropdown
+                userNameMini.textContent = `${currentUser.firstName} ${currentUser.lastName}`;
+                userEmailMini.textContent = currentUser.email;
                 
-                // Hide auth links
-                if (authLinks) {
-                    authLinks.style.display = 'none';
+                // Hide old profile bar if it exists
+                const oldProfileBar = document.getElementById('userProfileBar');
+                if (oldProfileBar) {
+                    oldProfileBar.style.display = 'none';
                 }
-                
-                // Add slide-in animation
-                setTimeout(() => {
-                    profileBar.style.opacity = '1';
-                    profileBar.style.transform = 'translateY(0)';
-                }, 100);
             }
         }
 
-        // Hide user profile bar
+        // Hide user profile (show auth options)
         function hideUserProfile() {
-            const profileBar = document.getElementById('userProfileBar');
-            const authLinks = document.getElementById('authLinks');
+            const authOptions = document.getElementById('authOptions');
+            const userOptions = document.getElementById('userOptions');
+            const profileInitials = document.getElementById('profileInitials');
             
-            profileBar.style.display = 'none';
+            // Show auth options, hide user options
+            authOptions.style.display = 'block';
+            userOptions.style.display = 'none';
             
-            // Show auth links
-            if (authLinks) {
-                authLinks.style.display = 'flex';
+            // Reset profile initials to default
+            profileInitials.textContent = '👤';
+            
+            // Hide old profile bar if it exists
+            const oldProfileBar = document.getElementById('userProfileBar');
+            if (oldProfileBar) {
+                oldProfileBar.style.display = 'none';
             }
         }
 
@@ -233,8 +353,12 @@
         function logout() {
             if (confirm('Are you sure you want to logout?')) {
                 localStorage.removeItem('isLoggedIn');
+                localStorage.removeItem('registeredUser');
                 currentUser = null;
                 hideUserProfile();
+                
+                // Close dropdown
+                document.getElementById('profileDropdown').classList.remove('active');
                 
                 // Clear cart on logout
                 cart = [];
@@ -253,6 +377,9 @@
         // Show profile modal
         function showProfile() {
             if (!currentUser) return;
+            
+            // Close dropdown
+            document.getElementById('profileDropdown').classList.remove('active');
             
             const modal = createModal('User Profile', `
                 <div class="profile-modal-content">
@@ -295,6 +422,9 @@
 
         // Show orders (placeholder)
         function showOrders() {
+            // Close dropdown
+            document.getElementById('profileDropdown').classList.remove('active');
+            
             const modal = createModal('My Orders', `
                 <div class="orders-content">
                     <div class="no-orders">
@@ -402,6 +532,7 @@
             cart.push(item);
             cartTotal += item.price;
             updateCartDisplay();
+            updateCartCount();
             showNotification(`${productName} added to cart!`);
         }
 
@@ -423,6 +554,7 @@
             });
             
             cartTotalElement.textContent = `Total: ₹${cartTotal.toFixed(2)}`;
+            updateCartCount();
         }
 
         // Remove from cart
@@ -434,6 +566,22 @@
                 updateCartDisplay();
                 showNotification('Item removed from cart');
             }
+        }
+
+        // Show wishlist (placeholder)
+        function showWishlist() {
+            const modal = createModal('My Wishlist', `
+                <div class="orders-content">
+                    <div class="no-orders">
+                        <span>❤️</span>
+                        <h3>Your wishlist is empty</h3>
+                        <p>Save items you love for later!</p>
+                        <button onclick="closeModal()" class="shop-now-btn">Start Shopping</button>
+                    </div>
+                </div>
+            `);
+            // Close dropdown after opening modal
+            document.getElementById('profileDropdown').classList.remove('active');
         }
 
         // Add event listeners to cart buttons
@@ -578,6 +726,7 @@
                 cart = [];
                 cartTotal = 0;
                 updateCartDisplay();
+                updateCartCount();
                 showNotification('Cart cleared');
             }
         }
