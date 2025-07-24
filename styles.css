@@ -165,20 +165,69 @@ header p {
 .cart {
     background: #fff;
     border-radius: 18px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.10);
-    padding: 1.5rem 1rem;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+    padding: 1.5rem;
     margin: 2rem auto 3rem auto;
-    width: 400px;
+    max-width: 500px;
     border: 1px solid #eee;
+}
+.cart h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 1rem;
+}
+.cart-actions {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    justify-content: center;
+}
+.clear-cart-btn, .checkout-btn {
+    padding: 0.8rem 1.5rem;
+    border: none;
+    border-radius: 25px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+.clear-cart-btn {
+    background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
+    color: white;
+}
+.clear-cart-btn:hover {
+    background: linear-gradient(135deg, #ff3742 0%, #ff2f3a 100%);
+    transform: translateY(-2px);
+}
+.checkout-btn {
+    background: linear-gradient(135deg, #5f27cd 0%, #341f97 100%);
+    color: white;
+}
+.checkout-btn:hover {
+    background: linear-gradient(135deg, #341f97 0%, #2d1b69 100%);
+    transform: translateY(-2px);
 }
 #cart-items {
     list-style: none;
     padding: 0;
     margin: 0 0 1rem 0;
+    max-height: 200px;
+    overflow-y: auto;
 }
 #cart-items li {
-    padding: 0.5rem 0;
+    padding: 0.8rem;
     border-bottom: 1px solid #eee;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    transition: background 0.2s ease;
+}
+#cart-items li:hover {
+    background: #f8f9fa;
+}
+#cart-items li:last-child {
+    border-bottom: none;
 }
 #cart-total {
     font-weight: bold;
@@ -279,7 +328,46 @@ footer {
     transition: color 0.2s, transform 0.2s;
     text-decoration: none;
 }
-.social-icons a:hover {
-    color: #00c6ff;
-    transform: scale(1.2);
-} 
+/* Animation keyframes */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(20px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideIn {
+    from { transform: translateX(-100%); opacity: 0; }
+    to { transform: translateX(0); opacity: 1; }
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+    transition: all 0.3s ease;
+}
+
+/* Enhanced header transitions */
+header {
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+/* Product grid responsive improvements */
+@media (max-width: 768px) {
+    .product-grid {
+        grid-template-columns: 1fr;
+        gap: 1rem;
+    }
+    
+    .category-buttons {
+        flex-direction: column;
+        gap: 0.5rem;
+    }
+    
+    .cart-actions {
+        flex-direction: column;
+    }
+}
