@@ -282,6 +282,7 @@
             setTimeout(() => {
                 // Store user data (in real app, this would be sent to server)
                 localStorage.setItem('registeredUser', JSON.stringify(userData));
+                localStorage.setItem('isLoggedIn', 'true');
                 
                 // Reset loading state
                 submitBtn.disabled = false;

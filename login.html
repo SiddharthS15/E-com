@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login - Fashion Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Fashion Store</h1>
+        <p>Welcome Back!</p>
+    </header>
+    
+    <div class="running-text">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            👋 Welcome Back! | Login to Access Your Account | Exclusive Deals Await! | Shop Your Favorites! 👋
+        </marquee>
+    </div>
+    
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="register.html">Register</a></li>
+            <li><a href="login.html" class="active">Login</a></li>
+        </ul>
+    </nav>
+
+    <main class="login-main">
+        <div class="login-container">
+            <div class="login-header">
+                <h2>Welcome Back</h2>
+                <p>Sign in to continue your fashion journey</p>
+            </div>
+            
+            <form class="login-form" id="loginForm">
+                <div class="form-group">
+                    <label for="loginEmail">Email Address *</label>
+                    <input type="email" id="loginEmail" name="email" required placeholder="Enter your email">
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="loginPassword">Password *</label>
+                    <div class="password-input-container">
+                        <input type="password" id="loginPassword" name="password" required placeholder="Enter your password">
+                        <button type="button" class="show-password-btn" onclick="togglePassword()">👁️</button>
+                    </div>
+                    <span class="error-message" id="passwordError"></span>
+                </div>
+                
+                <div class="form-options">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="rememberMe" name="rememberMe">
+                        <span class="checkmark"></span>
+                        Remember me
+                    </label>
+                    <a href="#" class="forgot-password" onclick="forgotPassword()">Forgot Password?</a>
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <span class="btn-text">Sign In</span>
+                    <span class="btn-loading" style="display: none;">Signing In...</span>
+                </button>
+                
+                <div class="register-link">
+                    Don't have an account? <a href="register.html">Create Account</a>
+                </div>
+            </form>
+            
+            <div class="social-login">
+                <div class="divider">
+                    <span>Or sign in with</span>
+                </div>
+                <div class="social-buttons">
+                    <button class="social-btn google-btn" onclick="loginWithGoogle()">
+                        <span>🔍</span> Google
+                    </button>
+                    <button class="social-btn facebook-btn" onclick="loginWithFacebook()">
+                        <span>📘</span> Facebook
+                    </button>
+                </div>
+            </div>
+            
+            <div class="demo-credentials">
+                <h4>Demo Credentials:</h4>
+                <p><strong>Email:</strong> demo@fashionstore.com</p>
+                <p><strong>Password:</strong> demo123</p>
+                <button class="demo-login-btn" onclick="fillDemoCredentials()">Use Demo Login</button>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <span>&copy; 2024 Fashion Store</span>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram">&#x1F4F7;</a>
+                <a href="#" aria-label="Twitter">&#x1F426;</a>
+                <a href="#" aria-label="Facebook">&#x1F5E8;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            form.addEventListener('submit', handleLogin);
+        });
+
+        function handleLogin(e) {
+            e.preventDefault();
+            
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value;
+            
+            // Clear previous errors
+            clearErrors();
+            
+            // Validate inputs
+            if (!validateLogin(email, password)) {
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.login-btn');
+            const btnText = document.querySelector('.btn-text');
+            const btnLoading = document.querySelector('.btn-loading');
+            
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Check credentials
+                const registeredUser = localStorage.getItem('registeredUser');
+                let loginSuccess = false;
+                
+                // Demo credentials
+                if (email === 'demo@fashionstore.com' && password === 'demo123') {
+                    const demoUser = {
+                        firstName: 'Demo',
+                        lastName: 'User',
+                        email: 'demo@fashionstore.com',
+                        phone: '+91 98765 43210',
+                        gender: 'prefer-not-to-say',
+                        dateOfBirth: '1990-01-01',
+                        address: 'Demo Address, Demo City',
+                        city: 'Demo City',
+                        state: 'Demo State',
+                        pincode: '123456'
+                    };
+                    localStorage.setItem('registeredUser', JSON.stringify(demoUser));
+                    loginSuccess = true;
+                }
+                // Check registered user
+                else if (registeredUser) {
+                    const userData = JSON.parse(registeredUser);
+                    if (userData.email === email && userData.password === password) {
+                        loginSuccess = true;
+                    }
+                }
+                
+                // Reset loading state
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                
+                if (loginSuccess) {
+                    localStorage.setItem('isLoggedIn', 'true');
+                    showNotification('Login successful! Welcome back!', 'success');
+                    
+                    // Redirect after delay
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 1500);
+                } else {
+                    showNotification('Invalid email or password!', 'error');
+                    showFieldError('password', 'Invalid credentials');
+                }
+                
+            }, 2000);
+        }
+
+        function validateLogin(email, password) {
+            let isValid = true;
+            
+            if (!email) {
+                showFieldError('email', 'Email is required');
+                isValid = false;
+            } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                showFieldError('email', 'Please enter a valid email');
+                isValid = false;
+            }
+            
+            if (!password) {
+                showFieldError('password', 'Password is required');
+                isValid = false;
+            } else if (password.length < 6) {
+                showFieldError('password', 'Password must be at least 6 characters');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        function showFieldError(fieldType, message) {
+            const errorSpan = document.getElementById(fieldType + 'Error');
+            errorSpan.textContent = message;
+            errorSpan.style.display = 'block';
+        }
+
+        function clearErrors() {
+            const errors = document.querySelectorAll('.error-message');
+            errors.forEach(error => {
+                error.style.display = 'none';
+            });
+        }
+
+        function togglePassword() {
+            const passwordInput = document.getElementById('loginPassword');
+            const toggleBtn = document.querySelector('.show-password-btn');
+            
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleBtn.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleBtn.textContent = '👁️';
+            }
+        }
+
+        function forgotPassword() {
+            showNotification('Password reset feature coming soon!', 'info');
+        }
+
+        function fillDemoCredentials() {
+            document.getElementById('loginEmail').value = 'demo@fashionstore.com';
+            document.getElementById('loginPassword').value = 'demo123';
+            showNotification('Demo credentials filled! Click Sign In to continue.', 'info');
+        }
+
+        function loginWithGoogle() {
+            showNotification('Google login will be implemented soon!', 'info');
+        }
+
+        function loginWithFacebook() {
+            showNotification('Facebook login will be implemented soon!', 'info');
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#0be881' : type === 'error' ? '#ff4757' : '#667eea'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+                font-weight: 600;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 4000);
+        }
+    </script>
+</body>
+</html>
