@@ -53,28 +53,22 @@
             <!-- Navigation Links -->
             <ul class="navbar-center">
                 <li><a href="index.html" class="nav-link active">
-                    <span class="nav-icon">🏠</span>
                     <span class="nav-text">Home</span>
                 </a></li>
                 <li><a href="products.html" class="nav-link">
-                    <span class="nav-icon">👕</span>
                     <span class="nav-text">All Products</span>
                 </a></li>
                 <li><a href="#men-products" class="nav-link" onclick="showCategory('men')">
-                    <span class="nav-icon">👔</span>
                     <span class="nav-text">Men's</span>
                 </a></li>
                 <li><a href="#women-products" class="nav-link" onclick="showCategory('women')">
-                    <span class="nav-icon">👚</span>
                     <span class="nav-text">Women's</span>
                 </a></li>
-                <li><a href="cart.html" class="nav-link">
-                    <span class="nav-icon">🛒</span>
+                <li><a href="#cart" class="nav-link" onclick="scrollToCart()">
                     <span class="nav-text">Cart</span>
                     <span class="cart-count" id="cartCount">0</span>
                 </a></li>
                 <li><a href="contact.html" class="nav-link">
-                    <span class="nav-icon">📞</span>
                     <span class="nav-text">Contact</span>
                 </a></li>
             </ul>
@@ -282,6 +276,26 @@
                 } else {
                     cartCount.style.display = 'none';
                 }
+            }
+        }
+
+        // Scroll to cart section
+        function scrollToCart() {
+            const cartSection = document.querySelector('.cart');
+            if (cartSection) {
+                cartSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+                
+                // Add a highlight effect to the cart
+                cartSection.style.boxShadow = '0 8px 40px rgba(102, 126, 234, 0.3)';
+                cartSection.style.transform = 'scale(1.02)';
+                
+                setTimeout(() => {
+                    cartSection.style.boxShadow = '0 4px 20px rgba(0,0,0,0.08)';
+                    cartSection.style.transform = 'scale(1)';
+                }, 1000);
             }
         }
 

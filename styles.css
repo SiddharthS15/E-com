@@ -224,6 +224,8 @@ header p {
     margin: 2rem auto 3rem auto;
     max-width: 500px;
     border: 1px solid #eee;
+    transition: all 0.3s ease;
+    scroll-margin-top: 100px;
 }
 .cart h2 {
     text-align: center;
@@ -690,16 +692,17 @@ header p {
 
 .nav-link {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    gap: 0.3rem;
-    padding: 0.8rem 1.2rem;
+    justify-content: center;
+    gap: 0.5rem;
+    padding: 1rem 1.5rem;
     color: white;
     text-decoration: none;
     border-radius: 12px;
     transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
+    min-height: 50px;
 }
 
 .nav-link::before {
@@ -727,38 +730,34 @@ header p {
     box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
 }
 
-.nav-icon {
-    font-size: 1.2rem;
-    transition: transform 0.3s ease;
-}
-
 .nav-text {
-    font-size: 0.85rem;
+    font-size: 0.9rem;
     font-weight: 600;
     text-transform: uppercase;
     letter-spacing: 0.5px;
 }
 
-.nav-link:hover .nav-icon {
-    transform: scale(1.2);
+.nav-link:hover .nav-text {
+    transform: scale(1.05);
 }
 
 /* Cart Count Badge */
 .cart-count {
     position: absolute;
-    top: -5px;
-    right: 8px;
+    top: 5px;
+    right: 5px;
     background: linear-gradient(135deg, #ff4757 0%, #ff3742 100%);
     color: white;
     border-radius: 50%;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
     font-weight: 700;
     box-shadow: 0 2px 8px rgba(255, 71, 87, 0.4);
+    border: 2px solid white;
 }
 
 /* Profile Circle */
@@ -947,12 +946,12 @@ header p {
     }
     
     .nav-link {
-        padding: 0.6rem 0.8rem;
-        min-width: 60px;
+        padding: 0.8rem 1rem;
+        min-width: 80px;
     }
     
     .nav-text {
-        font-size: 0.7rem;
+        font-size: 0.8rem;
     }
     
     .navbar-brand {
@@ -971,16 +970,18 @@ header p {
 
 @media (max-width: 480px) {
     .nav-text {
-        display: none;
+        font-size: 0.75rem;
     }
     
     .nav-link {
-        padding: 0.5rem;
-        min-width: 45px;
+        padding: 0.6rem 0.8rem;
+        min-width: 70px;
     }
     
-    .nav-icon {
-        font-size: 1.4rem;
+    .cart-count {
+        width: 18px;
+        height: 18px;
+        font-size: 0.7rem;
     }
 }
 
