@@ -1,0 +1,404 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - Fashion Store</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <header>
+        <h1>Fashion Store</h1>
+        <p>Create Your Account</p>
+    </header>
+    
+    <div class="running-text">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            🎉 Join Fashion Store Today! | Get 15% Off Your First Order | Free Shipping & Easy Returns! 🎉
+        </marquee>
+    </div>
+    
+    <nav>
+        <ul class="navbar">
+            <li><a href="index.html">Home</a></li>
+            <li><a href="products.html">All Products</a></li>
+            <li><a href="cart.html">Cart</a></li>
+            <li><a href="contact.html">Contact</a></li>
+            <li><a href="register.html" class="active">Register</a></li>
+        </ul>
+    </nav>
+
+    <main class="register-main">
+        <div class="register-container">
+            <div class="register-header">
+                <h2>Create Your Account</h2>
+                <p>Join thousands of fashion lovers and get exclusive access to our latest collections!</p>
+            </div>
+            
+            <form class="register-form" id="registerForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="firstName">First Name *</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                        <span class="error-message" id="firstNameError"></span>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastName">Last Name *</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                        <span class="error-message" id="lastNameError"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Email Address *</label>
+                    <input type="email" id="email" name="email" required>
+                    <span class="error-message" id="emailError"></span>
+                </div>
+                
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input type="tel" id="phone" name="phone" placeholder="+91 XXXXX XXXXX">
+                    <span class="error-message" id="phoneError"></span>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="password">Password *</label>
+                        <input type="password" id="password" name="password" required>
+                        <span class="error-message" id="passwordError"></span>
+                        <div class="password-strength" id="passwordStrength"></div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirmPassword">Confirm Password *</label>
+                        <input type="password" id="confirmPassword" name="confirmPassword" required>
+                        <span class="error-message" id="confirmPasswordError"></span>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dateOfBirth">Date of Birth</label>
+                    <input type="date" id="dateOfBirth" name="dateOfBirth">
+                </div>
+                
+                <div class="form-group">
+                    <label for="gender">Gender</label>
+                    <select id="gender" name="gender">
+                        <option value="">Select Gender</option>
+                        <option value="male">Male</option>
+                        <option value="female">Female</option>
+                        <option value="other">Other</option>
+                        <option value="prefer-not-to-say">Prefer not to say</option>
+                    </select>
+                </div>
+                
+                <div class="form-group address-group">
+                    <label for="address">Address</label>
+                    <textarea id="address" name="address" rows="3" placeholder="Enter your complete address"></textarea>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="city">City</label>
+                        <input type="text" id="city" name="city">
+                    </div>
+                    <div class="form-group">
+                        <label for="state">State</label>
+                        <input type="text" id="state" name="state">
+                    </div>
+                    <div class="form-group">
+                        <label for="pincode">PIN Code</label>
+                        <input type="text" id="pincode" name="pincode" pattern="[0-9]{6}" placeholder="XXXXXX">
+                    </div>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="newsletter" name="newsletter" checked>
+                        <span class="checkmark"></span>
+                        Subscribe to our newsletter for exclusive offers and fashion updates
+                    </label>
+                </div>
+                
+                <div class="checkbox-group">
+                    <label class="checkbox-label">
+                        <input type="checkbox" id="terms" name="terms" required>
+                        <span class="checkmark"></span>
+                        I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a> *
+                    </label>
+                </div>
+                
+                <button type="submit" class="register-btn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loading" style="display: none;">Creating Account...</span>
+                </button>
+                
+                <div class="login-link">
+                    Already have an account? <a href="login.html">Sign In</a>
+                </div>
+            </form>
+            
+            <div class="social-register">
+                <div class="divider">
+                    <span>Or register with</span>
+                </div>
+                <div class="social-buttons">
+                    <button class="social-btn google-btn" onclick="registerWithGoogle()">
+                        <span>🔍</span> Google
+                    </button>
+                    <button class="social-btn facebook-btn" onclick="registerWithFacebook()">
+                        <span>📘</span> Facebook
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <span>&copy; 2024 Fashion Store</span>
+            <div class="social-icons">
+                <a href="#" aria-label="Instagram">&#x1F4F7;</a>
+                <a href="#" aria-label="Twitter">&#x1F426;</a>
+                <a href="#" aria-label="Facebook">&#x1F5E8;</a>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            const password = document.getElementById('password');
+            const confirmPassword = document.getElementById('confirmPassword');
+            const email = document.getElementById('email');
+            
+            // Real-time password strength checker
+            password.addEventListener('input', checkPasswordStrength);
+            
+            // Real-time password match checker
+            confirmPassword.addEventListener('input', checkPasswordMatch);
+            
+            // Email validation
+            email.addEventListener('blur', validateEmail);
+            
+            // Form submission
+            form.addEventListener('submit', handleFormSubmit);
+            
+            // Add input animations
+            addInputAnimations();
+        });
+
+        function checkPasswordStrength() {
+            const password = document.getElementById('password').value;
+            const strengthDiv = document.getElementById('passwordStrength');
+            
+            let strength = 0;
+            let feedback = [];
+            
+            if (password.length >= 8) strength++;
+            else feedback.push('At least 8 characters');
+            
+            if (/[a-z]/.test(password)) strength++;
+            else feedback.push('Lowercase letter');
+            
+            if (/[A-Z]/.test(password)) strength++;
+            else feedback.push('Uppercase letter');
+            
+            if (/[0-9]/.test(password)) strength++;
+            else feedback.push('Number');
+            
+            if (/[^A-Za-z0-9]/.test(password)) strength++;
+            else feedback.push('Special character');
+            
+            const strengthText = ['Very Weak', 'Weak', 'Fair', 'Good', 'Strong'];
+            const strengthColors = ['#ff4757', '#ff6b6b', '#feca57', '#48dbfb', '#0be881'];
+            
+            if (password.length > 0) {
+                strengthDiv.innerHTML = `
+                    <div class="strength-bar">
+                        <div class="strength-fill" style="width: ${(strength/5)*100}%; background: ${strengthColors[strength-1] || '#ff4757'}"></div>
+                    </div>
+                    <span style="color: ${strengthColors[strength-1] || '#ff4757'}">${strengthText[strength-1] || 'Very Weak'}</span>
+                `;
+                if (feedback.length > 0) {
+                    strengthDiv.innerHTML += `<div class="strength-tips">Needs: ${feedback.join(', ')}</div>`;
+                }
+            } else {
+                strengthDiv.innerHTML = '';
+            }
+        }
+
+        function checkPasswordMatch() {
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const errorSpan = document.getElementById('confirmPasswordError');
+            
+            if (confirmPassword.length > 0) {
+                if (password !== confirmPassword) {
+                    errorSpan.textContent = 'Passwords do not match';
+                    errorSpan.style.display = 'block';
+                } else {
+                    errorSpan.style.display = 'none';
+                }
+            }
+        }
+
+        function validateEmail() {
+            const email = document.getElementById('email').value;
+            const errorSpan = document.getElementById('emailError');
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            
+            if (email.length > 0 && !emailRegex.test(email)) {
+                errorSpan.textContent = 'Please enter a valid email address';
+                errorSpan.style.display = 'block';
+            } else {
+                errorSpan.style.display = 'none';
+            }
+        }
+
+        function handleFormSubmit(e) {
+            e.preventDefault();
+            
+            // Get form data
+            const formData = new FormData(e.target);
+            const userData = Object.fromEntries(formData);
+            
+            // Validate required fields
+            if (!validateForm()) {
+                showNotification('Please fill in all required fields correctly', 'error');
+                return;
+            }
+            
+            // Show loading state
+            const submitBtn = document.querySelector('.register-btn');
+            const btnText = document.querySelector('.btn-text');
+            const btnLoading = document.querySelector('.btn-loading');
+            
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            
+            // Simulate API call
+            setTimeout(() => {
+                // Store user data (in real app, this would be sent to server)
+                localStorage.setItem('registeredUser', JSON.stringify(userData));
+                
+                // Reset loading state
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                
+                // Show success message
+                showNotification('Account created successfully! Welcome to Fashion Store!', 'success');
+                
+                // Redirect after delay
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+                
+            }, 2000);
+        }
+
+        function validateForm() {
+            const requiredFields = ['firstName', 'lastName', 'email', 'password', 'confirmPassword'];
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                const input = document.getElementById(field);
+                const value = input.value.trim();
+                
+                if (!value) {
+                    showFieldError(field, 'This field is required');
+                    isValid = false;
+                } else {
+                    hideFieldError(field);
+                }
+            });
+            
+            // Check if terms are accepted
+            const terms = document.getElementById('terms');
+            if (!terms.checked) {
+                showNotification('Please accept the Terms & Conditions', 'error');
+                isValid = false;
+            }
+            
+            return isValid;
+        }
+
+        function showFieldError(fieldId, message) {
+            const errorSpan = document.getElementById(fieldId + 'Error');
+            errorSpan.textContent = message;
+            errorSpan.style.display = 'block';
+        }
+
+        function hideFieldError(fieldId) {
+            const errorSpan = document.getElementById(fieldId + 'Error');
+            errorSpan.style.display = 'none';
+        }
+
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification notification-${type}`;
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#0be881' : type === 'error' ? '#ff4757' : '#667eea'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+                font-weight: 600;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    document.body.removeChild(notification);
+                }, 300);
+            }, 4000);
+        }
+
+        function addInputAnimations() {
+            const inputs = document.querySelectorAll('input, textarea, select');
+            inputs.forEach(input => {
+                input.addEventListener('focus', function() {
+                    this.parentElement.classList.add('focused');
+                });
+                
+                input.addEventListener('blur', function() {
+                    if (!this.value) {
+                        this.parentElement.classList.remove('focused');
+                    }
+                });
+                
+                if (input.value) {
+                    input.parentElement.classList.add('focused');
+                }
+            });
+        }
+
+        function registerWithGoogle() {
+            showNotification('Google registration will be implemented soon!', 'info');
+        }
+
+        function registerWithFacebook() {
+            showNotification('Facebook registration will be implemented soon!', 'info');
+        }
+    </script>
+</body>
+</html>
