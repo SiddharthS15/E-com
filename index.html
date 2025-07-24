@@ -43,14 +43,18 @@
         </marquee>
     </div>
     <nav>
-        <ul class="navbar">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">All Products</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="contact.html">Contact</a></li>
-            <li><a href="register.html" id="registerLink">Register</a></li>
-            <li><a href="login.html" id="loginLink">Login</a></li>
-        </ul>
+        <div class="nav-container">
+            <ul class="navbar-left">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="products.html">All Products</a></li>
+                <li><a href="cart.html">Cart</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+            <ul class="navbar-right" id="authLinks">
+                <li><a href="register.html" id="registerLink" class="auth-btn register-btn">Register</a></li>
+                <li><a href="login.html" id="loginLink" class="auth-btn login-btn">Login</a></li>
+            </ul>
+        </div>
     </nav>
     
     <!-- Category Selection -->
@@ -161,8 +165,7 @@
             const userName = document.getElementById('userName');
             const userEmail = document.getElementById('userEmail');
             const userInitials = document.getElementById('userInitials');
-            const registerLink = document.getElementById('registerLink');
-            const loginLink = document.getElementById('loginLink');
+            const authLinks = document.getElementById('authLinks');
             
             if (currentUser) {
                 // Update user info
@@ -176,9 +179,10 @@
                 // Show profile bar
                 profileBar.style.display = 'flex';
                 
-                // Hide register/login links
-                registerLink.parentElement.style.display = 'none';
-                loginLink.parentElement.style.display = 'none';
+                // Hide auth links
+                if (authLinks) {
+                    authLinks.style.display = 'none';
+                }
                 
                 // Add slide-in animation
                 setTimeout(() => {
@@ -191,12 +195,14 @@
         // Hide user profile bar
         function hideUserProfile() {
             const profileBar = document.getElementById('userProfileBar');
-            const registerLink = document.getElementById('registerLink');
-            const loginLink = document.getElementById('loginLink');
+            const authLinks = document.getElementById('authLinks');
             
             profileBar.style.display = 'none';
-            registerLink.parentElement.style.display = 'block';
-            loginLink.parentElement.style.display = 'block';
+            
+            // Show auth links
+            if (authLinks) {
+                authLinks.style.display = 'flex';
+            }
         }
 
         // Logout function

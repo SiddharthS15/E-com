@@ -589,10 +589,39 @@ header p {
     box-shadow: 0 4px 15px rgba(0,0,0,0.1);
     position: relative;
 }
+
+/* Navigation container */
+.nav-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+}
+
+.navbar-left, .navbar-right {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    gap: 0;
+}
+
+.navbar-left {
+    flex: 1;
+}
+
+.navbar-right {
+    flex-shrink: 0;
+}
+
 .navbar li {
     margin: 0;
     position: relative;
 }
+
 .navbar a {
     color: #fff;
     text-decoration: none;
@@ -605,6 +634,40 @@ header p {
     letter-spacing: 1px;
     font-size: 0.9rem;
 }
+
+/* Auth button styling */
+.auth-btn {
+    padding: 0.8rem 1.5rem !important;
+    margin: 0.6rem 0.3rem;
+    border-radius: 20px;
+    font-weight: 600 !important;
+    font-size: 0.85rem !important;
+    transition: all 0.3s ease;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.register-btn {
+    background: linear-gradient(135deg, #48dbfb 0%, #0abde3 100%) !important;
+    color: white !important;
+}
+
+.register-btn:hover {
+    background: linear-gradient(135deg, #0abde3 0%, #006ba6 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(72, 219, 251, 0.3);
+}
+
+.login-btn {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
+    color: white !important;
+}
+
+.login-btn:hover {
+    background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%) !important;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.3);
+}
 .navbar a::before {
     content: '';
     position: absolute;
@@ -616,13 +679,56 @@ header p {
     transition: all 0.3s ease;
     transform: translateX(-50%);
 }
-.navbar a:hover {
+
+.navbar-left a:hover {
     background: rgba(255,255,255,0.1);
     color: #fff;
     transform: translateY(-2px);
 }
-.navbar a:hover::before {
+
+.navbar-left a:hover::before {
     width: 80%;
+}
+
+.navbar a.active {
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+}
+
+.navbar a.active::before {
+    width: 80%;
+}
+
+/* Mobile responsive styles for navigation */
+@media (max-width: 768px) {
+    .nav-container {
+        flex-direction: column;
+        padding: 1rem;
+        gap: 1rem;
+    }
+    
+    .navbar-left, .navbar-right {
+        flex-direction: column;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .navbar-right {
+        flex-direction: row;
+        justify-content: center;
+        gap: 0.5rem;
+    }
+    
+    .auth-btn {
+        padding: 0.6rem 1.2rem !important;
+        margin: 0.3rem !important;
+        font-size: 0.8rem !important;
+    }
+    
+    .navbar a {
+        padding: 0.8rem 1.5rem;
+        font-size: 0.85rem;
+    }
 }
 footer {
     background: #222;
