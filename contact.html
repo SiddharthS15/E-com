@@ -3,26 +3,456 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Contact - Simple E-Commerce</title>
+    <title>Contact - Fashion Store</title>
     <link rel="stylesheet" href="styles.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
 </head>
 <body>
     <header>
-        <h1>Simple E-Commerce</h1>
+        <h1>Fashion Store</h1>
+        <p>Your Style, Your Statement</p>
     </header>
-    <nav>
-        <ul class="navbar">
-            <li><a href="index.html">Home</a></li>
-            <li><a href="products.html">Products</a></li>
-            <li><a href="cart.html">Cart</a></li>
-            <li><a href="contact.html">Contact</a></li>
-        </ul>
+    
+    <div class="running-text">
+        <marquee behavior="scroll" direction="left" scrollamount="5">
+            🔥 New Collection Arrived! | Free Shipping on Orders Above ₹999 | Trendy Fashion for All | 30-Day Returns! 🔥
+        </marquee>
+    </div>
+    
+    <nav class="main-navbar">
+        <div class="nav-container">
+            <!-- Logo/Brand -->
+            <div class="navbar-brand">
+                <span class="brand-icon">👗</span>
+                <span class="brand-text">Fashion Store</span>
+            </div>
+            
+            <!-- Navigation Links -->
+            <ul class="navbar-center">
+                <li><a href="index.html" class="nav-link">
+                    <span class="nav-text">Home</span>
+                </a></li>
+                <li><a href="index.html#men-products" class="nav-link">
+                    <span class="nav-text">Men's</span>
+                </a></li>
+                <li><a href="index.html#women-products" class="nav-link">
+                    <span class="nav-text">Women's</span>
+                </a></li>
+                <li><a href="index.html#cart" class="nav-link">
+                    <span class="nav-text">Cart</span>
+                </a></li>
+                <li><a href="contact.html" class="nav-link active">
+                    <span class="nav-text">Contact</span>
+                </a></li>
+            </ul>
+            
+            <!-- Profile Circle -->
+            <div class="profile-circle" onclick="window.location.href='index.html'">
+                <div class="profile-avatar">
+                    <span>👤</span>
+                </div>
+            </div>
+        </div>
     </nav>
+    
     <main>
-        <h2 style="text-align:center; margin-top:2rem;">Contact Us</h2>
-        <p style="text-align:center;">Feel free to reach out for any queries or support.</p>
+        <section class="contact-hero">
+            <div class="contact-hero-content">
+                <h2>Get in Touch</h2>
+                <p>Have a question or need assistance? We're here to help you with your fashion needs!</p>
+            </div>
+        </section>
+        
+        <section class="contact-container">
+            <div class="contact-info">
+                <h3>Contact Information</h3>
+                <div class="info-item">
+                    <div class="info-icon">📍</div>
+                    <div class="info-content">
+                        <h4>Address</h4>
+                        <p>123 Fashion Street, Style District<br>Mumbai, Maharashtra 400001</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">📞</div>
+                    <div class="info-content">
+                        <h4>Phone</h4>
+                        <p>+91 98765 43210<br>Mon-Sat: 10AM-8PM</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">✉️</div>
+                    <div class="info-content">
+                        <h4>Email</h4>
+                        <p>support@fashionstore.com<br>info@fashionstore.com</p>
+                    </div>
+                </div>
+                <div class="info-item">
+                    <div class="info-icon">🕒</div>
+                    <div class="info-content">
+                        <h4>Store Hours</h4>
+                        <p>Monday - Saturday: 10:00 AM - 8:00 PM<br>Sunday: 11:00 AM - 6:00 PM</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="contact-form-container">
+                <h3>Send us a Message</h3>
+                <form class="contact-form" id="contactForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="firstName">First Name *</label>
+                            <input type="text" id="firstName" name="firstName" required>
+                            <span class="form-error" id="firstNameError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="lastName">Last Name *</label>
+                            <input type="text" id="lastName" name="lastName" required>
+                            <span class="form-error" id="lastNameError"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="email">Email Address *</label>
+                            <input type="email" id="email" name="email" required>
+                            <span class="form-error" id="emailError"></span>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Phone Number</label>
+                            <input type="tel" id="phone" name="phone">
+                            <span class="form-error" id="phoneError"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Select a subject...</option>
+                            <option value="general">General Inquiry</option>
+                            <option value="order">Order Related</option>
+                            <option value="product">Product Information</option>
+                            <option value="return">Returns & Exchanges</option>
+                            <option value="payment">Payment Issues</option>
+                            <option value="complaint">Complaint</option>
+                            <option value="suggestion">Suggestion</option>
+                            <option value="other">Other</option>
+                        </select>
+                        <span class="form-error" id="subjectError"></span>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="orderNumber">Order Number (if applicable)</label>
+                        <input type="text" id="orderNumber" name="orderNumber" placeholder="e.g., FS123456789">
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="message">Your Message *</label>
+                        <textarea id="message" name="message" rows="6" placeholder="Please describe your query in detail..." required></textarea>
+                        <span class="form-error" id="messageError"></span>
+                        <div class="character-count">
+                            <span id="charCount">0</span>/500 characters
+                        </div>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="newsletter" name="newsletter">
+                            <span class="checkmark"></span>
+                            Subscribe to our newsletter for latest fashion updates and exclusive offers
+                        </label>
+                    </div>
+                    
+                    <div class="form-group checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="terms" name="terms" required>
+                            <span class="checkmark"></span>
+                            I agree to the <a href="#" class="terms-link">Terms & Conditions</a> and <a href="#" class="terms-link">Privacy Policy</a> *
+                        </label>
+                        <span class="form-error" id="termsError"></span>
+                    </div>
+                    
+                    <button type="submit" class="submit-btn">
+                        <span class="btn-text">Send Message</span>
+                        <span class="btn-loading" style="display: none;">Sending...</span>
+                    </button>
+                </form>
+            </div>
+        </section>
+        
+        <section class="faq-section">
+            <div class="faq-container">
+                <h3>Frequently Asked Questions</h3>
+                <div class="faq-grid">
+                    <div class="faq-item">
+                        <h4>What is your return policy?</h4>
+                        <p>We offer a 30-day return policy for all unworn items with original tags. Items must be in original condition.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>How long does shipping take?</h4>
+                        <p>Standard shipping takes 3-5 business days. Express shipping is available for 1-2 business days delivery.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>Do you offer international shipping?</h4>
+                        <p>Currently, we only ship within India. International shipping will be available soon.</p>
+                    </div>
+                    <div class="faq-item">
+                        <h4>How can I track my order?</h4>
+                        <p>Once your order ships, you'll receive a tracking number via email to monitor your package.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
+    
+    <!-- JavaScript for Contact Form -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('contactForm');
+            const messageTextarea = document.getElementById('message');
+            const charCount = document.getElementById('charCount');
+            
+            // Character counter for message
+            messageTextarea.addEventListener('input', function() {
+                const currentLength = this.value.length;
+                charCount.textContent = currentLength;
+                
+                if (currentLength > 500) {
+                    charCount.style.color = '#ff4757';
+                    this.style.borderColor = '#ff4757';
+                } else if (currentLength > 450) {
+                    charCount.style.color = '#ffa502';
+                    this.style.borderColor = '#ffa502';
+                } else {
+                    charCount.style.color = '#666';
+                    this.style.borderColor = '#ddd';
+                }
+            });
+            
+            // Form validation and submission
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                if (validateForm()) {
+                    submitForm();
+                }
+            });
+            
+            // Real-time validation for inputs
+            const inputs = form.querySelectorAll('input, select, textarea');
+            inputs.forEach(input => {
+                input.addEventListener('blur', function() {
+                    validateField(this);
+                });
+                
+                input.addEventListener('input', function() {
+                    clearError(this);
+                });
+            });
+        });
+        
+        function validateForm() {
+            let isValid = true;
+            const requiredFields = ['firstName', 'lastName', 'email', 'subject', 'message', 'terms'];
+            
+            requiredFields.forEach(fieldName => {
+                const field = document.getElementById(fieldName);
+                if (!validateField(field)) {
+                    isValid = false;
+                }
+            });
+            
+            return isValid;
+        }
+        
+        function validateField(field) {
+            const fieldName = field.name;
+            const value = field.value.trim();
+            let isValid = true;
+            let errorMessage = '';
+            
+            // Clear previous error
+            clearError(field);
+            
+            switch (fieldName) {
+                case 'firstName':
+                case 'lastName':
+                    if (!value) {
+                        errorMessage = 'This field is required';
+                        isValid = false;
+                    } else if (value.length < 2) {
+                        errorMessage = 'Must be at least 2 characters';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'email':
+                    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                    if (!value) {
+                        errorMessage = 'Email is required';
+                        isValid = false;
+                    } else if (!emailRegex.test(value)) {
+                        errorMessage = 'Please enter a valid email address';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'phone':
+                    if (value && !/^[\d\s\-\+\(\)]{10,}$/.test(value)) {
+                        errorMessage = 'Please enter a valid phone number';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'subject':
+                    if (!value) {
+                        errorMessage = 'Please select a subject';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'message':
+                    if (!value) {
+                        errorMessage = 'Message is required';
+                        isValid = false;
+                    } else if (value.length < 10) {
+                        errorMessage = 'Message must be at least 10 characters';
+                        isValid = false;
+                    } else if (value.length > 500) {
+                        errorMessage = 'Message must not exceed 500 characters';
+                        isValid = false;
+                    }
+                    break;
+                    
+                case 'terms':
+                    if (!field.checked) {
+                        errorMessage = 'You must agree to the terms and conditions';
+                        isValid = false;
+                    }
+                    break;
+            }
+            
+            if (!isValid) {
+                showError(field, errorMessage);
+            }
+            
+            return isValid;
+        }
+        
+        function showError(field, message) {
+            const errorElement = document.getElementById(field.name + 'Error');
+            if (errorElement) {
+                errorElement.textContent = message;
+                errorElement.style.display = 'block';
+            }
+            field.style.borderColor = '#ff4757';
+            field.classList.add('error');
+        }
+        
+        function clearError(field) {
+            const errorElement = document.getElementById(field.name + 'Error');
+            if (errorElement) {
+                errorElement.style.display = 'none';
+            }
+            field.style.borderColor = '#ddd';
+            field.classList.remove('error');
+        }
+        
+        function submitForm() {
+            const submitBtn = document.querySelector('.submit-btn');
+            const btnText = document.querySelector('.btn-text');
+            const btnLoading = document.querySelector('.btn-loading');
+            
+            // Show loading state
+            submitBtn.disabled = true;
+            btnText.style.display = 'none';
+            btnLoading.style.display = 'inline';
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Reset button state
+                submitBtn.disabled = false;
+                btnText.style.display = 'inline';
+                btnLoading.style.display = 'none';
+                
+                // Show success message
+                showNotification('Message sent successfully! We\'ll get back to you soon.', 'success');
+                
+                // Reset form
+                document.getElementById('contactForm').reset();
+                document.getElementById('charCount').textContent = '0';
+                
+                // Clear any remaining errors
+                const errorElements = document.querySelectorAll('.form-error');
+                errorElements.forEach(error => error.style.display = 'none');
+                
+                const inputs = document.querySelectorAll('input, select, textarea');
+                inputs.forEach(input => {
+                    input.style.borderColor = '#ddd';
+                    input.classList.remove('error');
+                });
+                
+            }, 2000);
+        }
+        
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = 'notification';
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: ${type === 'success' ? '#0be881' : type === 'error' ? '#ff4757' : 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)'};
+                color: white;
+                padding: 12px 20px;
+                border-radius: 8px;
+                box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+                z-index: 1000;
+                font-weight: 600;
+                opacity: 0;
+                transform: translateX(100%);
+                transition: all 0.3s ease;
+                max-width: 300px;
+            `;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.opacity = '1';
+                notification.style.transform = 'translateX(0)';
+            }, 100);
+            
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.transform = 'translateX(100%)';
+                setTimeout(() => {
+                    if (document.body.contains(notification)) {
+                        document.body.removeChild(notification);
+                    }
+                }, 300);
+            }, 5000);
+        }
+        
+        // FAQ toggle functionality
+        document.querySelectorAll('.faq-item h4').forEach(item => {
+            item.addEventListener('click', function() {
+                const faqItem = this.parentElement;
+                const isActive = faqItem.classList.contains('active');
+                
+                // Close all FAQ items
+                document.querySelectorAll('.faq-item').forEach(faq => {
+                    faq.classList.remove('active');
+                });
+                
+                // Open clicked item if it wasn't active
+                if (!isActive) {
+                    faqItem.classList.add('active');
+                }
+            });
+        });
+    </script>
+    
     <footer>
         <div class="footer-content">
             <span>&copy; 2024 Simple E-Commerce</span>
